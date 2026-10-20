@@ -1,0 +1,1630 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RLWC Scoreboard Configuration",
+  "description": "Rugby League World Cup scores from NRL.com, on the NRL scoreboard's layouts.",
+  "type": "object",
+  "$comment": "This object permits an other_games_divisions_data key that is not a setting and that the plugin never reads. The web UI renders other_games_divisions as a checkbox group, and that widget carries a hidden input named <field>_data, so every save of this page posts other_games_divisions_data beside other_games_divisions and the core writes it to config.json. With additionalProperties: false and no allowance, the core marks the plugin degraded over a key its own UI had just written. Left unconstrained because the widget has submitted it both as an array and as a JSON string; unknown keys are still rejected.",
+  "properties": {
+    "scroll_card": {
+      "type": "object",
+      "title": "Matchup Card Layout",
+      "description": "Layout of an upcoming or in-progress matchup: the separator drawn between the two teams, and how the date and time are written. These apply to the scroll and Vegas cards and to the full-screen scoreboard alike -- the full-screen one is controlled by its own \"Middle of a Full-Screen Upcoming Scoreboard\" setting so it keeps the look it has always had until you change it. The center-gap settings size the scroll and Vegas card only.",
+      "x-advanced": true,
+      "properties": {
+        "upcoming_center": {
+          "type": "string",
+          "title": "Middle of an Upcoming Card",
+          "description": "What to show between the two logos before a game starts. Upcoming games never show a score, since the game has not been played.",
+          "enum": [
+            "vs",
+            "date_time",
+            "none"
+          ],
+          "default": "vs",
+          "x-options": {
+            "labels": {
+              "vs": "Matchup separator (VS / @ / at)",
+              "date_time": "Date and time, stacked",
+              "none": "Nothing"
+            }
+          }
+        },
+        "switch_upcoming_center": {
+          "type": "string",
+          "title": "Middle of a Full-Screen Upcoming Scoreboard",
+          "description": "What to show between the two logos on the full-screen (switch mode) scoreboard before a game starts. Defaults to the stacked date and time, which is what this display has always shown. Pick the matchup separator to use the same VS / @ / at text as the scroll and Vegas cards, or \"Same as scroll and Vegas\" to follow the setting above.",
+          "enum": [
+            "date_time",
+            "vs",
+            "none",
+            "inherit"
+          ],
+          "default": "date_time",
+          "x-options": {
+            "labels": {
+              "date_time": "Date and time, stacked",
+              "vs": "Matchup separator (VS / @ / at)",
+              "none": "Nothing",
+              "inherit": "Same as scroll and Vegas"
+            }
+          }
+        },
+        "vs_text": {
+          "type": "string",
+          "title": "Matchup Separator",
+          "description": "Text drawn between the two teams, e.g. VS, @, at, v. The away team is always on the left and the home team on the right, so \"at\" and \"@\" read correctly as \"away at home\". Leave blank to draw nothing.",
+          "default": "VS",
+          "maxLength": 4
+        },
+        "date_format": {
+          "type": "string",
+          "title": "Date Format",
+          "description": "How to write the date: abbrev \"Sep 19\", numeric \"9/19\", day_first \"19 Sep\", numeric_day_first \"19/9\", weekday \"Fri Sep 19\".",
+          "enum": [
+            "abbrev",
+            "numeric",
+            "day_first",
+            "numeric_day_first",
+            "weekday"
+          ],
+          "default": "abbrev",
+          "x-options": {
+            "labels": {
+              "abbrev": "Sep 19",
+              "numeric": "9/19",
+              "day_first": "19 Sep",
+              "numeric_day_first": "19/9",
+              "weekday": "Fri Sep 19"
+            }
+          }
+        },
+        "switch_date_format": {
+          "type": "string",
+          "title": "Full-Screen Date Format",
+          "description": "How the date is written on the full-screen (switch mode) scoreboard. Defaults to \"9/19\", which is what this display has always drawn, so it does not change until you pick something else. Choose \"Same as scroll and Vegas\" to follow the Date Format setting above instead.",
+          "enum": [
+            "numeric",
+            "abbrev",
+            "day_first",
+            "numeric_day_first",
+            "weekday",
+            "inherit"
+          ],
+          "default": "numeric",
+          "x-advanced": true,
+          "x-options": {
+            "labels": {
+              "numeric": "9/19",
+              "abbrev": "Sep 19",
+              "day_first": "19 Sep",
+              "numeric_day_first": "19/9",
+              "weekday": "Fri Sep 19",
+              "inherit": "Same as scroll and Vegas"
+            }
+          }
+        },
+        "time_format": {
+          "type": "string",
+          "title": "Time Format",
+          "description": "12h shows \"7:00PM\"; 24h shows \"19:00\".",
+          "enum": [
+            "12h",
+            "24h"
+          ],
+          "default": "12h",
+          "x-options": {
+            "labels": {
+              "12h": "7:00PM  (12-hour)",
+              "24h": "19:00  (24-hour)"
+            }
+          }
+        },
+        "show_date": {
+          "type": "boolean",
+          "title": "Show Date",
+          "description": "Draw the date on upcoming cards.",
+          "default": true
+        },
+        "show_time": {
+          "type": "boolean",
+          "title": "Show Time",
+          "description": "Draw the start time on upcoming cards.",
+          "default": true
+        },
+        "switch_show_date": {
+          "type": "boolean",
+          "title": "Show Date (Full-Screen)",
+          "description": "Draw the date on the full-screen (switch mode) upcoming scoreboard. Show Date above now applies only to the scroll and Vegas cards. Before this release it also hid the full-screen date, so a config that turned it off shows the date here again until this switch is turned off.",
+          "default": true
+        },
+        "switch_show_time": {
+          "type": "boolean",
+          "title": "Show Time (Full-Screen)",
+          "description": "Draw the start time on the full-screen (switch mode) upcoming scoreboard. Show Time above now applies only to the scroll and Vegas cards. Before this release it also hid the full-screen time, so a config that turned it off shows the time here again until this switch is turned off.",
+          "default": true
+        },
+        "switch_recent_show_date": {
+          "type": "boolean",
+          "title": "Show Date (Full-Screen Recent)",
+          "description": "Draw the date along the bottom of the full-screen (switch mode) recent scoreboard. That screen has always drawn it and there was no way to turn it off, so this defaults on and nothing changes until you clear it. It is now written in the Full-Screen Date Format below, which it used to ignore - a panel set to \"Sep 19\" showed \"9/19\" here.",
+          "default": true
+        },
+        "swap_date_time": {
+          "type": "boolean",
+          "title": "Swap Date and Time",
+          "description": "Put the date on top and the time along the bottom instead of the default.",
+          "default": false
+        },
+        "center_gap": {
+          "type": "integer",
+          "title": "Center Gap",
+          "description": "Pixels kept clear down the middle so the score or VS is not drawn over the team logos. Leave unset to scale with the card width. 0 restores the old edge-to-edge logos.",
+          "minimum": 0,
+          "maximum": 64
+        },
+        "center_gap_ratio": {
+          "type": "number",
+          "title": "Center Gap Ratio",
+          "description": "Fraction of card width used for the centre gap when it is not pinned.",
+          "minimum": 0.0,
+          "maximum": 0.6,
+          "default": 0.28,
+          "x-advanced": true
+        },
+        "center_gap_min": {
+          "type": "integer",
+          "title": "Center Gap Minimum",
+          "description": "Lower bound in pixels for the scaled centre gap.",
+          "minimum": 0,
+          "maximum": 64,
+          "default": 22,
+          "x-advanced": true
+        },
+        "center_gap_max": {
+          "type": "integer",
+          "title": "Center Gap Maximum",
+          "description": "Upper bound in pixels for the scaled centre gap.",
+          "minimum": 0,
+          "maximum": 96,
+          "default": 40,
+          "x-advanced": true
+        }
+      }
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable Rugby League World Cup games"
+    },
+    "competition": {
+      "type": "string",
+      "enum": [
+        "mens",
+        "womens"
+      ],
+      "default": "mens",
+      "description": "Which World Cup: men's (NRL.com competition 131) or women's (157)."
+    },
+    "season": {
+      "type": "integer",
+      "default": 2026,
+      "minimum": 1954,
+      "maximum": 2100,
+      "description": "Tournament year (2026 in Australia and Papua New Guinea).",
+      "x-advanced": true
+    },
+    "logo_url_template": {
+      "type": "string",
+      "default": "",
+      "description": "Where team badges are downloaded from, with {key}, {file} and {version} filled in from NRL.com's team data. Leave blank for https://www.nrl.com/.theme/{key}/{file}?bust={version}.",
+      "x-advanced": true
+    },
+    "favorite_teams": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A World Cup team by name (e.g. 'Australia'), three-letter code (e.g. 'AUS') or NRL.com team id. 2026 teams: Australia, New Zealand, England, France, Samoa, Tonga, Fiji, Papua New Guinea, Lebanon, Cook Islands."
+      },
+      "uniqueItems": true,
+      "maxItems": 20,
+      "description": "Teams to prioritize. Use a name (Australia), code (AUS) or NRL.com team id."
+    },
+    "exclude_teams": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "A World Cup team by name (e.g. 'Australia'), three-letter code (e.g. 'AUS') or NRL.com team id. 2026 teams: Australia, New Zealand, England, France, Samoa, Tonga, Fiji, Papua New Guinea, Lebanon, Cook Islands."
+      },
+      "uniqueItems": true,
+      "maxItems": 20,
+      "default": [],
+      "description": "Teams to always hide from live rotation and recent/final scores (spoiler protection). Takes precedence over favourites."
+    },
+    "display_modes": {
+      "type": "object",
+      "title": "Display Modes",
+      "description": "Control which game types to show and how they are displayed",
+      "properties": {
+        "live": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show live World Cup games"
+        },
+        "live_display_mode": {
+          "type": "string",
+          "enum": [
+            "switch",
+            "scroll"
+          ],
+          "default": "switch",
+          "description": "Display mode for live games: 'switch' shows one game at a time, 'scroll' scrolls all games horizontally"
+        },
+        "recent": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show recently completed World Cup games"
+        },
+        "recent_display_mode": {
+          "type": "string",
+          "enum": [
+            "switch",
+            "scroll"
+          ],
+          "default": "switch",
+          "description": "Display mode for recent games: 'switch' shows one game at a time, 'scroll' scrolls all games horizontally"
+        },
+        "upcoming": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show upcoming World Cup games"
+        },
+        "upcoming_display_mode": {
+          "type": "string",
+          "enum": [
+            "switch",
+            "scroll"
+          ],
+          "default": "switch",
+          "description": "Display mode for upcoming games: 'switch' shows one game at a time, 'scroll' scrolls all games horizontally"
+        }
+      },
+      "additionalProperties": false
+    },
+    "scroll_settings": {
+      "type": "object",
+      "title": "Scroll Settings",
+      "description": "Settings for scroll display mode (when display mode is set to 'scroll')",
+      "properties": {
+        "scroll_speed": {
+          "x-advanced": true,
+          "type": "number",
+          "default": 50.0,
+          "minimum": 0.01,
+          "maximum": 200.0,
+          "description": "Scroll speed in pixels per second (default: 50). Higher values scroll faster."
+        },
+        "scroll_delay": {
+          "type": "number",
+          "default": 0.01,
+          "minimum": 0.001,
+          "maximum": 0.1,
+          "description": "Kept so saved configs still load; ignored. Scrolling is paced to the panel's refresh rate, and scroll_speed sets how fast it moves. HIDDEN: nothing reads it; scroll_speed is the only pacing control.",
+          "x-advanced": true,
+          "x-display": "hidden"
+        },
+        "gap_between_games": {
+          "type": "integer",
+          "default": 24,
+          "minimum": 8,
+          "maximum": 128,
+          "description": "Gap in pixels between game cards when scrolling (default: 24).",
+          "x-advanced": true
+        },
+        "show_league_separators": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show league icons between different leagues",
+          "x-advanced": true
+        },
+        "dynamic_duration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically calculate display duration based on content width",
+          "x-advanced": true
+        },
+        "game_card_width": {
+          "type": "integer",
+          "default": 128,
+          "minimum": 32,
+          "maximum": 512,
+          "description": "Width of each game card in scroll mode (pixels). Default 128. Set lower on multi-panel chains to show more games simultaneously.",
+          "x-advanced": true
+        }
+      }
+    },
+    "live_priority": {
+      "type": "boolean",
+      "default": true,
+      "description": "Give live games priority over other modes. When enabled, live games will interrupt the normal mode rotation and be displayed immediately when available."
+    },
+    "display_duration": {
+      "type": "number",
+      "default": 15,
+      "minimum": 5,
+      "maximum": 60,
+      "description": "Duration in seconds to display each game",
+      "x-advanced": true
+    },
+    "game_display_duration": {
+      "type": "number",
+      "default": 15,
+      "minimum": 3,
+      "maximum": 60,
+      "description": "Duration in seconds to show each individual game before rotating to the next game within the same mode",
+      "x-advanced": true
+    },
+    "live_game_duration": {
+      "type": "integer",
+      "default": 20,
+      "minimum": 10,
+      "maximum": 120,
+      "description": "Duration in seconds to display each live game before rotating to the next. When a separate non-favorite duration is set, this applies to games with a favorite team; it applies to ALL live games when no favorite teams are configured."
+    },
+    "non_favorite_live_game_duration": {
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 120,
+      "description": "Duration in seconds for live games that do NOT involve a favorite team. Only applies when favorite teams are set AND non-favorite live games are shown ('show_favorite_teams_only' off, or 'show_all_live' on). 0 (default) = use live_game_duration for every live game (no change).",
+      "x-advanced": true
+    },
+    "recent_game_duration": {
+      "type": "integer",
+      "default": 15,
+      "minimum": 5,
+      "maximum": 60,
+      "description": "Duration in seconds to display each recent game before rotating to the next game"
+    },
+    "upcoming_game_duration": {
+      "type": "integer",
+      "default": 15,
+      "minimum": 5,
+      "maximum": 60,
+      "description": "Duration in seconds to display each upcoming game before rotating to the next game"
+    },
+    "recent_games_to_show": {
+      "type": "integer",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 20,
+      "description": "With favorites: N games per favorite team. Without favorites: N total games sorted by time."
+    },
+    "upcoming_games_to_show": {
+      "type": "integer",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 20,
+      "description": "With favorites: N games per favorite team. Without favorites: N total games sorted by time."
+    },
+    "game_limits": {
+      "type": "object",
+      "title": "Game Limits",
+      "description": "Control how many games to show",
+      "properties": {
+        "recent_games_to_show": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "With favorites: N games per favorite team. Without favorites: N total games sorted by time.",
+          "x-advanced": true
+        },
+        "upcoming_games_to_show": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "With favorites: N games per favorite team. Without favorites: N total games sorted by time.",
+          "x-advanced": true
+        },
+        "other_upcoming_games_to_show": {
+          "type": "integer",
+          "title": "Other upcoming games to show",
+          "description": "How many NON-favorite upcoming games to include when favorite teams are set but 'Show favorite teams only' is off. Your favorites are shown first, then this many other games. Set to 0 to show only your favorites. Ignored when 'Show favorite teams only' is on, or when no favorite teams are set.",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 20,
+          "x-advanced": true
+        },
+        "other_recent_games_to_show": {
+          "type": "integer",
+          "title": "Other recent games to show",
+          "description": "How many NON-favorite recent games to include when favorite teams are set but 'Show favorite teams only' is off. Set to 0 to show only your favorites.",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 20,
+          "x-advanced": true
+        },
+        "other_rotation_interval_seconds": {
+          "type": "integer",
+          "title": "Rotate other games every (seconds)",
+          "description": "How often (seconds) to advance the window of NON-favorite games, so the board works through the schedule over time instead of showing the same handful. Variety comes from this turnover rather than from a larger selection: a bigger selection makes a full cycle longer, which makes any given game appear less often. Set to 0 to keep a fixed selection. Only applies when favorite teams are set and 'Show favorite teams only' is off.",
+          "default": 1800,
+          "minimum": 0,
+          "maximum": 86400,
+          "x-advanced": true
+        },
+        "favorite_rotation_boost": {
+          "type": "integer",
+          "title": "Favorite game turns",
+          "description": "In switch mode, how many turns each favorite team's recent or upcoming game gets for every 1 turn other games get. The extra turns are spread through the rotation, and kept apart whenever there are enough other games to separate them. Set to 1 to show every game once per rotation.",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 5,
+          "x-advanced": true
+        },
+        "other_games_min_quality": {
+          "type": "string",
+          "title": "Which other games to show",
+          "enum": [
+            "any",
+            "ranked"
+          ],
+          "description": "Which NON-favorite games are worth a slot. 'ranked' shows only games involving a nationally ranked team; 'any' is the old behaviour of whatever comes next chronologically. Your favorite teams are never filtered by this. A league with no national poll has nothing to rank against, so 'ranked' lets everything through there rather than emptying the slots. HIDDEN for this league: it publishes no poll (measured 2026-09-24 against ESPN's /rankings endpoint), so \"ranked\" has nothing to rank against, fails open, and lets every game through. Kept declared so saved configs keep validating.",
+          "default": "ranked",
+          "x-advanced": true,
+          "x-display": "hidden"
+        },
+        "other_games_divisions": {
+          "type": "array",
+          "title": "Divisions to include (other games)",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fbs",
+              "fcs",
+              "other"
+            ]
+          },
+          "uniqueItems": true,
+          "default": [
+            "fbs"
+          ],
+          "description": "Which divisions the NON-favorite games may come from. At least one team has to be in a checked division, so with only FBS checked you still see a ranked FBS team hosting an FCS school, but two FCS teams playing each other are left out. Check FCS or Other to bring those in as well. Your favorite teams are never filtered by this, so a team from any division still always appears. FBS/FCS is a college FOOTBALL taxonomy and ESPN publishes those rosters for that league alone, so this setting does nothing in any other league -- no lookup is even attempted. HIDDEN: inert in this plugin. ESPN publishes FBS/FCS group rosters for college-football alone (sports.py _DIVISION_GROUPS_BY_LEAGUE), so the lookup here returns nothing, the filter fails open, and no choice can change what is shown. Kept declared so saved configs keep validating.",
+          "x-widget": "checkbox-group",
+          "x-advanced": true,
+          "x-display": "hidden"
+        }
+      }
+    },
+    "show_records": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show each team's pool position (e.g. 1st) under its logo"
+    },
+    "show_ranking": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show team rankings. HIDDEN: the World Cup feed publishes no rankings. Kept declared so saved configs keep validating.",
+      "x-display": "hidden"
+    },
+    "show_odds": {
+      "type": "boolean",
+      "default": false,
+      "description": "Show betting odds for games. HIDDEN: odds come from ESPN, which does not carry the World Cup, so nothing can be shown. Kept declared so saved configs keep validating.",
+      "x-display": "hidden"
+    },
+    "display_options": {
+      "type": "object",
+      "title": "Display Options",
+      "description": "Additional information to show",
+      "properties": {
+        "show_records": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show each team's pool position (e.g. 1st) under its logo",
+          "x-advanced": true
+        },
+        "show_ranking": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show team rankings (when available) HIDDEN for this league: it publishes no poll (measured 2026-09-24 against ESPN's /rankings endpoint), so the rank table is always empty. Worse than inert: the badge REPLACES the record, so turning this on erased the records Show Records was drawing. Kept declared so saved configs keep validating.",
+          "x-advanced": true,
+          "x-display": "hidden"
+        },
+        "show_odds": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show betting odds for games. HIDDEN: odds come from ESPN, which does not carry the World Cup, so nothing can be shown. Kept declared so saved configs keep validating.",
+          "x-advanced": true,
+          "x-display": "hidden"
+        }
+      }
+    },
+    "show_favorite_teams_only": {
+      "type": "boolean",
+      "default": true,
+      "description": "Only show games from favorite teams"
+    },
+    "filtering": {
+      "type": "object",
+      "title": "Filtering Options",
+      "description": "Control which teams are shown",
+      "properties": {
+        "show_favorite_teams_only": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only show games from favorite teams",
+          "x-advanced": true
+        },
+        "show_all_live": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show all live games, not just favorites",
+          "x-advanced": true
+        },
+        "favorite_live_boost": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "default": 2,
+          "description": "How many turns your favorite team's live game gets in the rotation for every 1 turn other live games get. Your favorite's game is also always queued first whenever the live rotation refreshes. Set to 1 for even rotation.",
+          "x-advanced": true
+        }
+      }
+    },
+    "celebration_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show a celebratory takeover screen when a favorite team scores or wins a live game"
+    },
+    "celebration_duration": {
+      "type": "integer",
+      "default": 8,
+      "minimum": 3,
+      "maximum": 30,
+      "description": "How long the goal/win celebration stays on screen (seconds)",
+      "x-advanced": true
+    },
+    "celebrate_opponent_goals": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also celebrate when the opponent scores, not just favorites (off by default)",
+      "x-advanced": true
+    },
+    "celebration_team_colors": {
+      "type": "boolean",
+      "default": true,
+      "description": "Draw the celebration in the scoring team's colours, read from its logo. Off uses a fixed navy and amber palette",
+      "x-advanced": true
+    },
+    "celebration_confetti": {
+      "type": "boolean",
+      "default": true,
+      "description": "Fall team-coloured confetti across the celebration screen",
+      "x-advanced": true
+    },
+    "update_interval_seconds": {
+      "type": "integer",
+      "default": 3600,
+      "minimum": 30,
+      "maximum": 86400,
+      "description": "How often to fetch new data (seconds) HIDDEN: nothing reads it. It seeds each league's base update interval, which every manager then replaces with its own (live_update_interval, recent_update_interval, upcoming_update_interval) before anything reads it; the core scheduler reads update_interval, not this key.",
+      "x-advanced": true,
+      "x-display": "hidden"
+    },
+    "live_update_interval": {
+      "type": "integer",
+      "default": 30,
+      "minimum": 5,
+      "maximum": 300,
+      "description": "How often to update live game data (seconds)",
+      "x-advanced": true
+    },
+    "stale_game_timeout": {
+      "type": "integer",
+      "default": 300,
+      "minimum": 60,
+      "maximum": 3600,
+      "description": "How long a live game may go without an update before it is dropped from the rotation (seconds). Guards against a game the API stops reporting sitting on the board forever.",
+      "x-advanced": true
+    },
+    "recent_update_interval": {
+      "type": "integer",
+      "default": 3600,
+      "minimum": 60,
+      "maximum": 86400,
+      "description": "Update interval for recent games (seconds)",
+      "x-advanced": true
+    },
+    "upcoming_update_interval": {
+      "type": "integer",
+      "default": 3600,
+      "minimum": 60,
+      "maximum": 86400,
+      "description": "Update interval for upcoming games (seconds)",
+      "x-advanced": true
+    },
+    "odds_update_interval": {
+      "type": "integer",
+      "default": 3600,
+      "minimum": 60,
+      "maximum": 86400,
+      "description": "How long fetched betting odds for a game that is not live are reused before asking again (seconds)",
+      "x-advanced": true
+    },
+    "live_odds_update_interval": {
+      "type": "integer",
+      "default": 60,
+      "minimum": 15,
+      "maximum": 3600,
+      "description": "How long fetched betting odds for a live game are reused before asking again (seconds)",
+      "x-advanced": true
+    },
+    "timezone": {
+      "x-advanced": true,
+      "type": "string",
+      "default": "",
+      "description": "IANA timezone used to display event start times (e.g. America/Chicago). Leave blank to follow the LEDMatrix global timezone, or the system timezone if none is set."
+    },
+    "dynamic_duration": {
+      "type": "object",
+      "title": "World Cup Dynamic Duration Settings",
+      "description": "Configure dynamic duration settings for World Cup games.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable dynamic duration for World Cup games",
+          "x-advanced": true
+        },
+        "min_duration_seconds": {
+          "type": "number",
+          "minimum": 10,
+          "maximum": 300,
+          "default": 30,
+          "description": "Minimum total duration in seconds for this mode, even if few games are available",
+          "x-advanced": true
+        },
+        "max_duration_seconds": {
+          "type": "number",
+          "minimum": 60,
+          "maximum": 600,
+          "description": "Max duration for World Cup games",
+          "x-advanced": true
+        },
+        "modes": {
+          "type": "object",
+          "title": "Per-Mode Settings for the World Cup",
+          "description": "Configure dynamic duration for specific World Cup modes",
+          "properties": {
+            "live": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Enable dynamic duration for World Cup live games",
+                  "x-advanced": true
+                },
+                "max_duration_seconds": {
+                  "type": "number",
+                  "minimum": 60,
+                  "maximum": 600,
+                  "description": "Max duration for World Cup live games",
+                  "x-advanced": true
+                }
+              }
+            },
+            "recent": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Enable dynamic duration for World Cup recent games",
+                  "x-advanced": true
+                },
+                "max_duration_seconds": {
+                  "type": "number",
+                  "minimum": 60,
+                  "maximum": 600,
+                  "description": "Max duration for World Cup recent games",
+                  "x-advanced": true
+                }
+              }
+            },
+            "upcoming": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Enable dynamic duration for World Cup upcoming games",
+                  "x-advanced": true
+                },
+                "max_duration_seconds": {
+                  "type": "number",
+                  "minimum": 60,
+                  "maximum": 600,
+                  "description": "Max duration for World Cup upcoming games",
+                  "x-advanced": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mode_durations": {
+      "type": "object",
+      "title": "Mode-Level Durations",
+      "description": "Control total duration for each mode type. If not set, uses dynamic calculation (total_games × per_game_duration).",
+      "properties": {
+        "recent_mode_duration": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "minimum": 10,
+          "maximum": 600,
+          "description": "Total duration in seconds for Recent mode before rotating to next mode. Default: null (uses dynamic calculation).",
+          "x-advanced": true
+        },
+        "upcoming_mode_duration": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "minimum": 10,
+          "maximum": 600,
+          "description": "Total duration in seconds for Upcoming mode before rotating to next mode. Default: null (uses dynamic calculation).",
+          "x-advanced": true
+        },
+        "live_mode_duration": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "minimum": 10,
+          "maximum": 600,
+          "description": "Total duration in seconds for Live mode before rotating to next mode. Default: null (uses dynamic calculation).",
+          "x-advanced": true
+        }
+      }
+    },
+    "background_service": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable background service for data fetching",
+          "x-advanced": true
+        },
+        "max_workers": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Worker threads for background fetching. The service is shared process-wide, so the first plugin to start decides for everyone; raise it only if fetches are queueing.",
+          "x-advanced": true
+        },
+        "request_timeout": {
+          "type": "integer",
+          "default": 30,
+          "minimum": 5,
+          "maximum": 120,
+          "description": "Request timeout in seconds",
+          "x-advanced": true
+        },
+        "max_retries": {
+          "type": "integer",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 10,
+          "description": "Maximum number of retries for failed requests",
+          "x-advanced": true
+        },
+        "priority": {
+          "type": "integer",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Background service priority",
+          "x-advanced": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "customization": {
+      "type": "object",
+      "title": "Display Customization",
+      "description": "Customize fonts for different text elements on the scoreboard",
+      "x-style-modes": [
+        "live",
+        "upcoming",
+        "recent"
+      ],
+      "properties": {
+        "score_text": {
+          "type": "object",
+          "title": "Game Score",
+          "description": "Font settings for the game score display",
+          "properties": {
+            "font": {
+              "type": "string",
+              "title": "Font Family",
+              "description": "Select the font to use for scores",
+              "enum": [
+                "PressStart2P-Regular.ttf",
+                "4x6-font.ttf",
+                "5by7.regular.ttf",
+                "5x7.bdf",
+                "4x6.bdf"
+              ],
+              "default": "PressStart2P-Regular.ttf"
+            },
+            "font_size": {
+              "type": "integer",
+              "title": "Font Size",
+              "description": "Font size in pixels",
+              "minimum": 4,
+              "maximum": 16,
+              "default": 10
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the score text on scroll/Vegas cards.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                255,
+                255
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "font",
+            "font_size",
+            "text_color"
+          ],
+          "additionalProperties": false
+        },
+        "period_text": {
+          "type": "object",
+          "title": "Period/Clock",
+          "description": "Font settings for period, clock, and time remaining text",
+          "properties": {
+            "font": {
+              "type": "string",
+              "title": "Font Family",
+              "description": "Select the font to use",
+              "enum": [
+                "PressStart2P-Regular.ttf",
+                "4x6-font.ttf",
+                "5by7.regular.ttf",
+                "5x7.bdf",
+                "4x6.bdf"
+              ],
+              "default": "PressStart2P-Regular.ttf"
+            },
+            "font_size": {
+              "type": "integer",
+              "title": "Font Size",
+              "description": "Font size in pixels",
+              "minimum": 4,
+              "maximum": 16,
+              "default": 8
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the period text on scroll/Vegas cards.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                255,
+                255
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "font",
+            "font_size",
+            "text_color"
+          ],
+          "additionalProperties": false
+        },
+        "team_name": {
+          "type": "object",
+          "title": "Team Names",
+          "description": "Font settings for team name abbreviations",
+          "properties": {
+            "font": {
+              "type": "string",
+              "title": "Font Family",
+              "description": "Select the font to use",
+              "enum": [
+                "PressStart2P-Regular.ttf",
+                "4x6-font.ttf",
+                "5by7.regular.ttf",
+                "5x7.bdf",
+                "4x6.bdf"
+              ],
+              "default": "PressStart2P-Regular.ttf"
+            },
+            "font_size": {
+              "type": "integer",
+              "title": "Font Size",
+              "description": "Font size in pixels",
+              "minimum": 4,
+              "maximum": 16,
+              "default": 8
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the team name on scroll/Vegas cards.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                255,
+                255
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "font",
+            "font_size",
+            "text_color"
+          ],
+          "additionalProperties": false
+        },
+        "status_text": {
+          "type": "object",
+          "title": "Status Messages",
+          "description": "Font settings for status text (e.g., 'Next Game', 'Final')",
+          "properties": {
+            "font": {
+              "type": "string",
+              "title": "Font Family",
+              "description": "Select the font to use",
+              "enum": [
+                "PressStart2P-Regular.ttf",
+                "4x6-font.ttf",
+                "5by7.regular.ttf",
+                "5x7.bdf",
+                "4x6.bdf"
+              ],
+              "default": "4x6-font.ttf"
+            },
+            "font_size": {
+              "type": "integer",
+              "title": "Font Size",
+              "description": "Font size in pixels",
+              "minimum": 4,
+              "maximum": 16,
+              "default": 6
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the status text on scroll/Vegas cards.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                255,
+                255
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "font",
+            "font_size",
+            "text_color"
+          ],
+          "additionalProperties": false
+        },
+        "detail_text": {
+          "type": "object",
+          "title": "Details/Odds",
+          "description": "Font settings for odds and other detail information",
+          "properties": {
+            "font": {
+              "type": "string",
+              "title": "Font Family",
+              "description": "Select the font to use",
+              "enum": [
+                "PressStart2P-Regular.ttf",
+                "4x6-font.ttf",
+                "5by7.regular.ttf",
+                "5x7.bdf",
+                "4x6.bdf"
+              ],
+              "default": "4x6-font.ttf"
+            },
+            "font_size": {
+              "type": "integer",
+              "title": "Font Size",
+              "description": "Font size in pixels",
+              "minimum": 4,
+              "maximum": 16,
+              "default": 6
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the detail text on scroll/Vegas cards.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                255,
+                255
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "font",
+            "font_size",
+            "text_color"
+          ],
+          "additionalProperties": false
+        },
+        "odds_text": {
+          "type": "object",
+          "title": "Odds Text",
+          "description": "Customize the betting line and over/under text.",
+          "properties": {
+            "font": {
+              "x-advanced": true,
+              "type": "string",
+              "default": "4x6-font.ttf",
+              "description": "Font family for odds text. Defaults to the same 4x6 font the detail text uses; press_start is chunkier and easier to read on a large panel, but roughly twice as wide."
+            },
+            "font_size": {
+              "x-advanced": true,
+              "type": "integer",
+              "default": 6,
+              "description": "Font size for odds text. Sizes snap to the font's pixel grid to stay crisp: 4x6-font.ttf snaps to 7, 14, 21; press_start to 8, 16."
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the odds text.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                0,
+                255,
+                0
+              ],
+              "x-advanced": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "rank_text": {
+          "type": "object",
+          "title": "Rankings",
+          "description": "Font settings for ranking displays",
+          "properties": {
+            "font": {
+              "type": "string",
+              "title": "Font Family",
+              "description": "Select the font to use",
+              "enum": [
+                "PressStart2P-Regular.ttf",
+                "4x6-font.ttf",
+                "5by7.regular.ttf",
+                "5x7.bdf",
+                "4x6.bdf"
+              ],
+              "default": "PressStart2P-Regular.ttf"
+            },
+            "font_size": {
+              "type": "integer",
+              "title": "Font Size",
+              "description": "Font size in pixels",
+              "minimum": 4,
+              "maximum": 16,
+              "default": 10
+            },
+            "text_color": {
+              "type": "array",
+              "title": "Text Color",
+              "description": "Colour [R, G, B] for the rank text on scroll/Vegas cards.",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                255,
+                255
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "font",
+            "font_size",
+            "text_color"
+          ],
+          "additionalProperties": false
+        },
+        "layout": {
+          "type": "object",
+          "title": "Layout Positioning",
+          "description": "Adjust X,Y coordinate offsets for elements. Values are relative to default positions. Use negative values to move left/up, positive to move right/down.",
+          "properties": {
+            "home_logo": {
+              "type": "object",
+              "title": "Home Team Logo",
+              "properties": {
+                "x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from default position (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from default position (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "away_logo": {
+              "type": "object",
+              "title": "Away Team Logo",
+              "properties": {
+                "x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from default position (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from default position (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "score": {
+              "type": "object",
+              "title": "Game Score",
+              "properties": {
+                "x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from center (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from center (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "status_text": {
+              "type": "object",
+              "title": "Status/Period Text",
+              "properties": {
+                "x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from center (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from top (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "date": {
+              "type": "object",
+              "title": "Game Date",
+              "properties": {
+                "x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from center (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from default position (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "time": {
+              "type": "object",
+              "title": "Game Time",
+              "properties": {
+                "x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from center (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from date position (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "records": {
+              "type": "object",
+              "title": "Records/Rankings",
+              "properties": {
+                "away_x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Away team record horizontal offset from left (default: 0)"
+                },
+                "home_x_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Home team record horizontal offset from right (default: 0)"
+                },
+                "y_offset": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from bottom (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            },
+            "odds": {
+              "type": "object",
+              "title": "Betting Odds",
+              "properties": {
+                "x_offset": {
+                  "x-advanced": true,
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Horizontal offset from default position (default: 0)"
+                },
+                "y_offset": {
+                  "x-advanced": true,
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Vertical offset from default position (default: 0)"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "x-propertyOrder": [
+            "home_logo",
+            "away_logo",
+            "score",
+            "status_text",
+            "date",
+            "time",
+            "records",
+            "odds"
+          ],
+          "additionalProperties": false
+        },
+        "favorite_result_colors": {
+          "type": "object",
+          "title": "Favorite Team Result Colors",
+          "description": "Color the final score of a recent game by how your favorite team did. Most useful in scroll and Vegas modes, where the same matchup can go past several times and the logos alone do not tell you who won.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Color Scores by Result",
+              "description": "Show the final score in green when your favorite team won and red when it lost. Games without exactly one favorite team - neither side, or both - keep the normal score color.",
+              "default": false
+            },
+            "win_color": {
+              "type": "array",
+              "title": "Win Color",
+              "description": "Score color [R, G, B] when your favorite team won",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                0,
+                255,
+                0
+              ],
+              "x-advanced": true
+            },
+            "loss_color": {
+              "type": "array",
+              "title": "Loss Color",
+              "description": "Score color [R, G, B] when your favorite team lost",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                0,
+                0
+              ],
+              "x-advanced": true
+            },
+            "tie_color": {
+              "type": "array",
+              "title": "Tie Color",
+              "description": "Score color [R, G, B] when the game ended level",
+              "x-widget": "color-picker",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "default": [
+                255,
+                200,
+                0
+              ],
+              "x-advanced": true
+            }
+          },
+          "x-propertyOrder": [
+            "enabled",
+            "win_color",
+            "loss_color",
+            "tie_color"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "x-propertyOrder": [
+        "score_text",
+        "period_text",
+        "team_name",
+        "status_text",
+        "detail_text",
+        "odds_text",
+        "rank_text",
+        "layout",
+        "favorite_result_colors"
+      ],
+      "additionalProperties": false
+    },
+    "schedule_lookback_days": {
+      "type": "integer",
+      "default": 14,
+      "minimum": 1,
+      "maximum": 60,
+      "title": "Schedule lookback (days)",
+      "description": "How far back to fetch games for the Recent screen. Raise it if finished games disappear sooner than you want.",
+      "x-advanced": true
+    },
+    "schedule_lookahead_days": {
+      "type": "integer",
+      "default": 7,
+      "minimum": 1,
+      "maximum": 60,
+      "title": "Schedule lookahead (days)",
+      "description": "How far ahead to fetch games for the Upcoming screen. Raise it for a league that plays weekly: a fixture just beyond this horizon is not fetched at all, so it never reaches the board even though the date is known.",
+      "x-advanced": true
+    },
+    "no_data_interval_seconds": {
+      "type": "integer",
+      "default": 300,
+      "minimum": 5,
+      "maximum": 86400,
+      "title": "Idle live-check interval (seconds)",
+      "description": "How long to wait between checks for live games when there are none. Backs off further the longer nothing is found, up to the cap below.",
+      "x-advanced": true
+    },
+    "live_idle_max_interval_seconds": {
+      "type": "integer",
+      "default": 900,
+      "minimum": 5,
+      "maximum": 86400,
+      "title": "Maximum idle live-check interval (seconds)",
+      "description": "Ceiling for the back-off above. Raise it to poll an out-of-season league even less; lower it to notice the first game after a quiet spell sooner.",
+      "x-advanced": true
+    },
+    "other_upcoming_games_to_show": {
+      "type": "integer",
+      "title": "Other upcoming games to show",
+      "description": "How many NON-favorite upcoming games to include when favorite teams are set but 'Show favorite teams only' is off. Your favorites are shown first, then this many other games. Set to 0 to show only your favorites. Ignored when 'Show favorite teams only' is on, or when no favorite teams are set.",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 20,
+      "x-advanced": true
+    },
+    "other_recent_games_to_show": {
+      "type": "integer",
+      "title": "Other recent games to show",
+      "description": "How many NON-favorite recent games to include when favorite teams are set but 'Show favorite teams only' is off. Set to 0 to show only your favorites.",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 20,
+      "x-advanced": true
+    },
+    "other_rotation_interval_seconds": {
+      "type": "integer",
+      "title": "Rotate other games every (seconds)",
+      "description": "How often (seconds) to advance the window of NON-favorite games, so the board works through the schedule over time instead of showing the same handful. Variety comes from this turnover rather than from a larger selection: a bigger selection makes a full cycle longer, which makes any given game appear less often. Set to 0 to keep a fixed selection. Only applies when favorite teams are set and 'Show favorite teams only' is off.",
+      "default": 1800,
+      "minimum": 0,
+      "maximum": 86400,
+      "x-advanced": true
+    },
+    "favorite_rotation_boost": {
+      "type": "integer",
+      "title": "Favorite game turns",
+      "description": "In switch mode, how many turns each favorite team's recent or upcoming game gets for every 1 turn other games get. The extra turns are spread through the rotation, and kept apart whenever there are enough other games to separate them. Set to 1 to show every game once per rotation.",
+      "default": 1,
+      "minimum": 1,
+      "maximum": 5,
+      "x-advanced": true
+    },
+    "other_games_min_quality": {
+      "type": "string",
+      "title": "Which other games to show",
+      "enum": [
+        "any",
+        "ranked"
+      ],
+      "description": "Which NON-favorite games are worth a slot. 'ranked' shows only games involving a nationally ranked team; 'any' is the old behaviour of whatever comes next chronologically. Your favorite teams are never filtered by this. A league with no national poll has nothing to rank against, so 'ranked' lets everything through there rather than emptying the slots. HIDDEN for this league: it publishes no poll (measured 2026-09-24 against ESPN's /rankings endpoint), so \"ranked\" has nothing to rank against, fails open, and lets every game through. Kept declared so saved configs keep validating.",
+      "default": "ranked",
+      "x-advanced": true,
+      "x-display": "hidden"
+    },
+    "other_games_divisions": {
+      "type": "array",
+      "title": "Divisions to include (other games)",
+      "items": {
+        "type": "string",
+        "enum": [
+          "fbs",
+          "fcs",
+          "other"
+        ]
+      },
+      "uniqueItems": true,
+      "default": [
+        "fbs"
+      ],
+      "description": "Which divisions the NON-favorite games may come from. At least one team has to be in a checked division, so with only FBS checked you still see a ranked FBS team hosting an FCS school, but two FCS teams playing each other are left out. Check FCS or Other to bring those in as well. Your favorite teams are never filtered by this, so a team from any division still always appears. FBS/FCS is a college FOOTBALL taxonomy and ESPN publishes those rosters for that league alone, so this setting does nothing in any other league -- no lookup is even attempted. HIDDEN: inert in this plugin. ESPN publishes FBS/FCS group rosters for college-football alone (sports.py _DIVISION_GROUPS_BY_LEAGUE), so the lookup here returns nothing, the filter fails open, and no choice can change what is shown. Kept declared so saved configs keep validating.",
+      "x-widget": "checkbox-group",
+      "x-advanced": true,
+      "x-display": "hidden"
+    }
+  },
+  "patternProperties": {
+    "^other_games_divisions_data$": {
+      "$comment": "Written by the web UI, not a setting -- see the $comment on this schema's root object."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "enabled"
+  ],
+  "x-propertyOrder": [
+    "enabled",
+    "competition",
+    "season",
+    "logo_url_template",
+    "favorite_teams",
+    "exclude_teams",
+    "display_modes",
+    "scroll_settings",
+    "live_priority",
+    "display_duration",
+    "game_display_duration",
+    "live_game_duration",
+    "non_favorite_live_game_duration",
+    "recent_game_duration",
+    "upcoming_game_duration",
+    "recent_games_to_show",
+    "other_recent_games_to_show",
+    "other_rotation_interval_seconds",
+    "favorite_rotation_boost",
+    "other_games_min_quality",
+    "other_games_divisions",
+    "upcoming_games_to_show",
+    "other_upcoming_games_to_show",
+    "game_limits",
+    "show_records",
+    "show_ranking",
+    "show_odds",
+    "display_options",
+    "show_favorite_teams_only",
+    "filtering",
+    "celebration_enabled",
+    "celebration_duration",
+    "celebrate_opponent_goals",
+    "celebration_team_colors",
+    "celebration_confetti",
+    "update_interval_seconds",
+    "live_update_interval",
+    "stale_game_timeout",
+    "recent_update_interval",
+    "upcoming_update_interval",
+    "odds_update_interval",
+    "live_odds_update_interval",
+    "timezone",
+    "dynamic_duration",
+    "mode_durations",
+    "background_service",
+    "customization",
+    "schedule_lookback_days",
+    "schedule_lookahead_days",
+    "scroll_card",
+    "no_data_interval_seconds",
+    "live_idle_max_interval_seconds"
+  ]
+}

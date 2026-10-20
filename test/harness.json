@@ -1,0 +1,28 @@
+{
+  "_comment": "Deterministic fixture for the plugin safety harness. Seeds the RLWC draw cache (rlwc_draw_131_2026, as RlwcFeed.cache_key builds it) with real 2026 Round 1 results and Round 2 fixtures, frozen 65 minutes into Papua New Guinea v Samoa so live, recent and upcoming all render without a network call. fetched_at equals the frozen time, so the feed treats the cache as fresh. Favourites PNG (live) and AUS (recent and upcoming) exercise the favourites-first selection path.",
+  "config": {
+    "enabled": true,
+    "timezone": "UTC",
+    "favorite_teams": [
+      "PNG",
+      "AUS"
+    ],
+    "display_modes": {
+      "live": true,
+      "live_display_mode": "switch",
+      "recent": true,
+      "recent_display_mode": "switch",
+      "upcoming": true,
+      "upcoming_display_mode": "switch"
+    },
+    "live_priority": true,
+    "show_favorite_teams_only": false,
+    "recent_games_to_show": 5,
+    "upcoming_games_to_show": 5,
+    "live_game_duration": 20,
+    "recent_game_duration": 15,
+    "upcoming_game_duration": 15
+  },
+  "freeze_time": "2026-10-24 05:30:00",
+  "mock_data": "test/fixtures/mock.json"
+}

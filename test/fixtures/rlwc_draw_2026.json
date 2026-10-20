@@ -1,0 +1,450 @@
+{
+ "round1": {
+  "fixtures": [
+   {
+    "type": "Match",
+    "isCurrentRound": false,
+    "roundTitle": "Round 1",
+    "matchMode": "Post",
+    "matchState": "FullTime",
+    "venue": "Allianz Stadium",
+    "venueCity": "Sydney",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-1/australia-v-new-zealand/",
+    "homeTeam": {
+     "teamId": 500149,
+     "nickName": "Australia",
+     "theme": {
+      "key": "australia",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202511210221",
+       "badge-light.svg": "202511210221"
+      }
+     },
+     "score": 24
+    },
+    "awayTeam": {
+     "teamId": 500150,
+     "nickName": "New Zealand",
+     "theme": {
+      "key": "new-zealand",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "score": 22
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-15T09:05:00Z",
+     "gameTime": "80:00"
+    },
+    "groupName": "Pool A"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": false,
+    "roundTitle": "Round 1",
+    "matchMode": "Post",
+    "matchState": "FullTime",
+    "venue": "CommBank Stadium",
+    "venueCity": "Sydney",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-1/samoa-v-france/",
+    "homeTeam": {
+     "teamId": 500159,
+     "nickName": "Samoa",
+     "theme": {
+      "key": "samoa",
+      "logos": {
+       "badge.png": "202610191107"
+      }
+     },
+     "score": 78
+    },
+    "awayTeam": {
+     "teamId": 500319,
+     "nickName": "France",
+     "theme": {
+      "key": "france",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "score": 4
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-16T06:45:00Z",
+     "gameTime": "80:00"
+    },
+    "groupName": "Pool B & C"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": false,
+    "roundTitle": "Round 1",
+    "matchMode": "Post",
+    "matchState": "FullTime",
+    "venue": "Santos National Football Stadium",
+    "venueCity": "Port Moresby",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-1/papua-new-guinea-v-lebanon/",
+    "homeTeam": {
+     "teamId": 500213,
+     "nickName": "Papua New Guinea",
+     "theme": {
+      "key": "papua-new-guinea",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202509250554"
+      }
+     },
+     "score": 42
+    },
+    "awayTeam": {
+     "teamId": 500341,
+     "nickName": "Lebanon",
+     "theme": {
+      "key": "lebanon",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202601120252"
+      }
+     },
+     "score": 18
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-17T04:25:00Z",
+     "gameTime": "80:00"
+    },
+    "groupName": "Pool B & C"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": false,
+    "roundTitle": "Round 1",
+    "matchMode": "Post",
+    "matchState": "FullTime",
+    "venue": "HBF Park",
+    "venueCity": "Perth",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-1/england-v-tonga/",
+    "homeTeam": {
+     "teamId": 500201,
+     "nickName": "England",
+     "theme": {
+      "key": "england",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "score": 12
+    },
+    "awayTeam": {
+     "teamId": 500214,
+     "nickName": "Tonga",
+     "theme": {
+      "key": "tonga-new",
+      "logos": {
+       "badge.png": "202408291056",
+       "badge-light.png": "202408291056"
+      }
+     },
+     "score": 30
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-17T09:05:00Z",
+     "gameTime": "80:00"
+    },
+    "groupName": "Pool B & C"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": false,
+    "roundTitle": "Round 1",
+    "matchMode": "Post",
+    "matchState": "FullTime",
+    "venue": "McDonald Jones Stadium",
+    "venueCity": "Newcastle",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-1/fiji-v-cook-islands/",
+    "homeTeam": {
+     "teamId": 500158,
+     "nickName": "Fiji",
+     "theme": {
+      "key": "fiji",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "score": 40
+    },
+    "awayTeam": {
+     "teamId": 500340,
+     "nickName": "Cook Islands",
+     "theme": {
+      "key": "cook-islands",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "score": 12
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-18T05:05:00Z",
+     "gameTime": "80:00"
+    },
+    "groupName": "Pool A"
+   }
+  ],
+  "filterRounds": [
+   {
+    "name": "Final",
+    "value": 5
+   },
+   {
+    "name": "Semi Final",
+    "value": 4
+   },
+   {
+    "name": "Round 3",
+    "value": 3
+   },
+   {
+    "name": "Round 2",
+    "value": 2
+   },
+   {
+    "name": "Round 1",
+    "value": 1
+   }
+  ],
+  "selectedCompetitionId": 131,
+  "selectedSeasonId": 2026,
+  "selectedRoundId": 1
+ },
+ "round2": {
+  "fixtures": [
+   {
+    "type": "Match",
+    "isCurrentRound": true,
+    "roundTitle": "Round 2",
+    "matchMode": "Pre",
+    "matchState": "Upcoming",
+    "venue": "CommBank Stadium",
+    "venueCity": "Sydney",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-2/tonga-v-lebanon/",
+    "homeTeam": {
+     "teamId": 500214,
+     "nickName": "Tonga",
+     "theme": {
+      "key": "tonga-new",
+      "logos": {
+       "badge.png": "202408291056",
+       "badge-light.png": "202408291056"
+      }
+     },
+     "teamPosition": "3rd"
+    },
+    "awayTeam": {
+     "teamId": 500341,
+     "nickName": "Lebanon",
+     "theme": {
+      "key": "lebanon",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202601120252"
+      }
+     },
+     "teamPosition": "5th"
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-23T09:05:00Z",
+     "gameTime": "0:00"
+    },
+    "groupName": "Pool B & C"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": true,
+    "roundTitle": "Round 2",
+    "matchMode": "Pre",
+    "matchState": "Upcoming",
+    "venue": "Santos National Football Stadium",
+    "venueCity": "Port Moresby",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-2/papua-new-guinea-v-samoa/",
+    "homeTeam": {
+     "teamId": 500213,
+     "nickName": "Papua New Guinea",
+     "theme": {
+      "key": "papua-new-guinea",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202509250554"
+      }
+     },
+     "teamPosition": "2nd"
+    },
+    "awayTeam": {
+     "teamId": 500159,
+     "nickName": "Samoa",
+     "theme": {
+      "key": "samoa",
+      "logos": {
+       "badge.png": "202610191107"
+      }
+     },
+     "teamPosition": "1st"
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-24T04:25:00Z",
+     "gameTime": "0:00"
+    },
+    "groupName": "Pool B & C"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": true,
+    "roundTitle": "Round 2",
+    "matchMode": "Pre",
+    "matchState": "Upcoming",
+    "venue": "HBF Park",
+    "venueCity": "Perth",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-2/england-v-france/",
+    "homeTeam": {
+     "teamId": 500201,
+     "nickName": "England",
+     "theme": {
+      "key": "england",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "teamPosition": "4th"
+    },
+    "awayTeam": {
+     "teamId": 500319,
+     "nickName": "France",
+     "theme": {
+      "key": "france",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "teamPosition": "6th"
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-24T06:35:00Z",
+     "gameTime": "0:00"
+    },
+    "groupName": "Pool B & C"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": true,
+    "roundTitle": "Round 2",
+    "matchMode": "Pre",
+    "matchState": "Upcoming",
+    "venue": "One NZ Stadium",
+    "venueCity": "Christchurch",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-2/new-zealand-v-cook-islands/",
+    "homeTeam": {
+     "teamId": 500150,
+     "nickName": "New Zealand",
+     "theme": {
+      "key": "new-zealand",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "teamPosition": "3rd"
+    },
+    "awayTeam": {
+     "teamId": 500340,
+     "nickName": "Cook Islands",
+     "theme": {
+      "key": "cook-islands",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "teamPosition": "4th"
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-25T05:05:00Z",
+     "gameTime": "0:00"
+    },
+    "groupName": "Pool A"
+   },
+   {
+    "type": "Match",
+    "isCurrentRound": true,
+    "roundTitle": "Round 2",
+    "matchMode": "Pre",
+    "matchState": "Upcoming",
+    "venue": "Suncorp Stadium",
+    "venueCity": "Brisbane",
+    "matchCentreUrl": "/draw/rugby-league-world-cup/2026/round-2/australia-v-fiji/",
+    "homeTeam": {
+     "teamId": 500149,
+     "nickName": "Australia",
+     "theme": {
+      "key": "australia",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202511210221",
+       "badge-light.svg": "202511210221"
+      }
+     },
+     "teamPosition": "2nd"
+    },
+    "awayTeam": {
+     "teamId": 500158,
+     "nickName": "Fiji",
+     "theme": {
+      "key": "fiji",
+      "logos": {
+       "badge.png": "202610191107",
+       "badge.svg": "202610191107"
+      }
+     },
+     "teamPosition": "1st"
+    },
+    "clock": {
+     "kickOffTimeLong": "2026-10-25T09:05:00Z",
+     "gameTime": "0:00"
+    },
+    "groupName": "Pool A"
+   }
+  ],
+  "filterRounds": [
+   {
+    "name": "Final",
+    "value": 5
+   },
+   {
+    "name": "Semi Final",
+    "value": 4
+   },
+   {
+    "name": "Round 3",
+    "value": 3
+   },
+   {
+    "name": "Round 2",
+    "value": 2
+   },
+   {
+    "name": "Round 1",
+    "value": 1
+   }
+  ],
+  "selectedCompetitionId": 131,
+  "selectedSeasonId": 2026,
+  "selectedRoundId": 2
+ }
+}

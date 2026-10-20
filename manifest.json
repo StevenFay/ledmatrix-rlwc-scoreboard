@@ -1,0 +1,41 @@
+{
+  "id": "rlwc-scoreboard",
+  "name": "RLWC Scoreboard",
+  "version": "1.0.0",
+  "author": "StevenFay",
+  "description": "Live, recent, and upcoming Rugby League World Cup games from NRL.com, on ChuckBuilds' NRL scoreboard layouts.",
+  "category": "sports",
+  "tags": [
+    "rlwc",
+    "rugby-league",
+    "world-cup",
+    "sports",
+    "scoreboard",
+    "live-scores"
+  ],
+  "display_modes": [
+    "rlwc_live",
+    "rlwc_recent",
+    "rlwc_upcoming"
+  ],
+  "last_updated": "2026-10-20",
+  "stars": 0,
+  "downloads": 0,
+  "verified": false,
+  "screenshot": "",
+  "repo": "https://github.com/StevenFay/ledmatrix-rlwc-scoreboard",
+  "entry_point": "manager.py",
+  "class_name": "RlwcScoreboardPlugin",
+  "config_schema": "config_schema.json",
+  "compatible_versions": [
+    ">=3.8.6"
+  ],
+  "versions": [
+    {
+      "version": "1.0.0",
+      "released": "2026-10-20",
+      "ledmatrix_min_version": "3.8.6",
+      "notes": "First release. Adapted from ChuckBuilds' nrl-scoreboard 1.42.0: the same switch, scroll and Vegas displays, fed from NRL.com's Rugby League World Cup draw (competition 131; women's 157) instead of ESPN, which does not carry it."
+    }
+  ]
+}
