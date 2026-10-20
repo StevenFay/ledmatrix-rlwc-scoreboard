@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0 (2026-10-20)
+
+- Team logos are half their former size, with the country's name underneath
+  (its three-letter code where the full name doesn't fit). Applies to the
+  switch screens and the scroll / Vegas cards.
+- New settings: `logo_size_percent` (default 50) and `show_team_names` (default on).
+
 ## 1.0.0 (2026-10-20)
 
 First release, adapted from ChuckBuilds' nrl-scoreboard 1.42.0

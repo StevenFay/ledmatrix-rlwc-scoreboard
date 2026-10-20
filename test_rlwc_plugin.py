@@ -298,6 +298,63 @@ class TestFeed(unittest.TestCase):
         self.assertIsNot(a, rlwc_feed.RlwcFeed.shared(157, 2026, "RLWWC"))
 
 
+class TestBadges(unittest.TestCase):
+    """Logo at logo_size_percent of the NRL layout's size, name underneath."""
+
+    @classmethod
+    def setUpClass(cls):
+        from PIL import Image, ImageFont
+        import rlwc_badges
+        cls.badges, cls.Image = rlwc_badges, Image
+        core = _find_core()
+        path = core / "assets" / "fonts" / "4x6-font.ttf" if core else None
+        cls.font = (ImageFont.truetype(str(path), 6) if path and path.exists()
+                    else ImageFont.load_default())
+        # A 300x300 logo with transparent padding round a 200x200 mark.
+        cls.logo = Image.new("RGBA", (300, 300), (0, 0, 0, 0))
+        cls.logo.paste(Image.new("RGBA", (200, 200), (255, 0, 0, 255)), (50, 50))
+
+    def badge(self, **kw):
+        args = dict(logo=self.logo, team_id="500149", abbr="AUS", panel_height=32,
+                    font=self.font)
+        args.update(kw)
+        return self.badges.badge(**args)
+
+    def test_half_size_logo_with_name_fits_the_panel(self):
+        b = self.badge()
+        self.assertLessEqual(b.height, 32)
+        # 50% of the NRL layout's 1.5x panel height is 24px, less room for the name.
+        red = [y for y in range(b.height) if b.getpixel((b.width // 2, y))[:3] == (255, 0, 0)]
+        self.assertEqual(red[0], 0, "padding is trimmed")
+        self.assertLessEqual(len(red), 24)
+        self.assertGreater(len(red), 16)
+        # Something is drawn below the logo: the name.
+        below = b.crop((0, red[-1] + 2, b.width, b.height))
+        self.assertIsNotNone(below.getbbox())
+
+    def test_no_names_gives_a_bigger_logo_alone(self):
+        b = self.badge(show_name=False)
+        self.assertEqual(b.height, 24)
+        b = self.badge(show_name=False, percent=100)
+        self.assertEqual(b.height, 32, "never taller than the panel")
+
+    def test_long_names_fall_back_to_the_code(self):
+        wide = self.badge(team_id="500213", abbr="PNG")             # Papua New Guinea
+        narrow = self.badge(team_id="500213", abbr="PNG", max_width=24)
+        self.assertLessEqual(narrow.width, 24)
+        self.assertLess(narrow.width, wide.width)
+
+    def test_settings(self):
+        self.assertEqual(self.badges.settings({}), (50, True))
+        self.assertEqual(self.badges.settings({"logo_size_percent": "300",
+                                               "show_team_names": False}), (100, False))
+        self.assertEqual(self.badges.settings({"logo_size_percent": "x"}), (50, True))
+
+    def test_no_font_still_gives_a_logo(self):
+        b = self.badge(font=None)
+        self.assertLessEqual(b.height, 24)
+
+
 CORE = _find_core()
 
 

@@ -27,6 +27,8 @@ The World Cup settings sit at the top of the plugin's settings page:
 | `season` | `2026` | Tournament year. |
 | `favorite_teams` | none | Teams to prioritise: a name (`Australia`), a code (`AUS`) or an NRL.com team id. |
 | `exclude_teams` | none | Teams never to show (spoiler protection). |
+| `logo_size_percent` | `50` | Logo size, as a percentage of the NRL scoreboard's full-height logos. |
+| `show_team_names` | on | Country name under each logo (three-letter code if the name doesn't fit). |
 | `logo_url_template` | blank | Advanced. Where badges are downloaded from; blank uses NRL.com. |
 | `timezone` | LEDMatrix's | Kick-off times are shown in this zone. |
 

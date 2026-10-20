@@ -17,6 +17,8 @@ from pathlib import Path
 from typing import Any, ClassVar, Dict, Optional, Tuple
 from PIL import Image, ImageDraw, ImageFont
 
+import rlwc_badges
+
 from src.common import sports_card as _card
 from src.common.sports_game_renderer import SportsGameRendererMixin
 from src.common.sports_card_wrappers import SportsCardWrappersMixin
@@ -299,6 +301,13 @@ class GameRenderer(SportsCardWrappersMixin, SportsGameRendererMixin):
                 if bbox:
                     logo = logo.crop(bbox)
                 logo.thumbnail((self._logo_slot_width(), self.display_height), Image.Resampling.LANCZOS)
+                # RLWC: the badge -- logo at logo_size_percent, country name under it.
+                percent, show_names = rlwc_badges.settings(self.config)
+                logo = rlwc_badges.badge(
+                    logo, team_id, team_abbrev, self.display_height,
+                    (getattr(self, 'fonts', None) or {}).get('detail')
+                    or (getattr(self, 'fonts', None) or {}).get('status'), percent,
+                    show_names, max_width=self._logo_slot_width())
 
                 cache[cache_key] = logo
                 while len(cache) > self._LOGO_CACHE_MAX:

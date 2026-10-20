@@ -219,6 +219,18 @@
       "description": "Where team badges are downloaded from, with {key}, {file} and {version} filled in from NRL.com's team data. Leave blank for https://www.nrl.com/.theme/{key}/{file}?bust={version}.",
       "x-advanced": true
     },
+    "logo_size_percent": {
+      "type": "integer",
+      "default": 50,
+      "minimum": 10,
+      "maximum": 100,
+      "description": "Team logo size, as a percentage of the NRL scoreboard's full-height logos. 50 leaves room for the country name underneath."
+    },
+    "show_team_names": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show the country's name under its logo (its three-letter code when the full name doesn't fit)."
+    },
     "favorite_teams": {
       "type": "array",
       "items": {
@@ -1578,6 +1590,8 @@
     "competition",
     "season",
     "logo_url_template",
+    "logo_size_percent",
+    "show_team_names",
     "favorite_teams",
     "exclude_teams",
     "display_modes",

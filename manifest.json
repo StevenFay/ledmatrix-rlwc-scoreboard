@@ -1,7 +1,7 @@
 {
   "id": "rlwc-scoreboard",
   "name": "RLWC Scoreboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "StevenFay",
   "description": "Live, recent, and upcoming Rugby League World Cup games from NRL.com, on ChuckBuilds' NRL scoreboard layouts.",
   "category": "sports",
@@ -31,6 +31,12 @@
     ">=3.8.6"
   ],
   "versions": [
+    {
+      "version": "1.1.0",
+      "released": "2026-10-20",
+      "ledmatrix_min_version": "3.8.6",
+      "notes": "Team logos are half their former size, with the country's name underneath (its three-letter code where the full name doesn't fit), on the switch screens and the scroll / Vegas cards. New settings logo_size_percent (default 50) and show_team_names (default on)."
+    },
     {
       "version": "1.0.0",
       "released": "2026-10-20",

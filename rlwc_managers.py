@@ -13,6 +13,7 @@ from typing import Any, Dict, Optional
 
 from sports import (SportsCore, SportsLive, SportsRecent, SportsUpcoming,
                     _team_logo_filename)
+import rlwc_badges
 import rlwc_feed
 
 #: Display label per competition key.
@@ -119,11 +120,27 @@ class BaseRlwcManager(SportsCore):
     def _fetch_odds(self, game: Dict) -> None:
         return None
 
+    def _load_and_resize_logo(self, team_id, team_abbrev, logo_path, logo_url):
+        """The team's badge: its logo at ``logo_size_percent`` of the NRL
+        layout's size, with the country's name underneath (rlwc_badges)."""
+        logo = super()._load_and_resize_logo(team_id, team_abbrev, logo_path, logo_url)
+        if logo is None:
+            return None
+        percent, show_names = rlwc_badges.settings(self.mode_config)
+        return rlwc_badges.badge(
+            logo, team_id, team_abbrev, self.display_height,
+            (getattr(self, "fonts", None) or {}).get("detail"), percent, show_names,
+            max_width=max(16, self.display_width // 3))
+
     def _extract_game_details(self, game_event: Dict) -> Optional[Dict]:
         """Game details, with rugby league halves as in the NRL plugin."""
         details, home_team, away_team, status, situation = self._extract_game_details_common(game_event)
         if details is None or home_team is None or away_team is None or status is None:
             return None
+        for competitor in (home_team, away_team):
+            team = competitor.get("team") or {}
+            rlwc_badges.remember(competitor.get("id") or team.get("id"),
+                                 team.get("displayName") or team.get("name"))
         try:
             period = status.get("period", 0)
             status_state = status["type"]["state"]
